@@ -24,11 +24,17 @@
 ## 生成方式（可复现）
 
 ```bash
-# 素材需预先克隆到 reference-products/（与本仓库同级），随后：
+pip install -r requirements.txt        # 仅需 openpyxl
+# 素材克隆到与本仓库同级的 reference-products/（或用参数显式指定路径）：
+#   git clone https://github.com/lilinji/English   reference-products/English
+#   git clone https://github.com/skywind3000/ECDICT reference-products/ecdict
 python tools/build_wordpack_open.py [English仓库路径] [ECDICT目录] [输出json]
+
 # 校验词条数与档位分布：
 python tools/stats.py
 ```
+
+`tools/build_wordpack_open.py` 复用同目录 `tools/build_word_levels.py`（共用 `WORD_RE`、归一化与合并语义，与 MuseReader Rust 端 `WordLevelIndex` 同规则），两个文件需一起保留。
 
 素材构成（全量，非抽样）：
 1. **lilinji/English** 词表仓库 —— 全部 949 份 xlsx（10 档大纲/考研/雅思/托福/专四/专八/GRE + 全国 20 个教材版本中小学同步词书；短语/句型表按设计排除）；
